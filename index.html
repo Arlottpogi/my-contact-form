@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Form</title>
+</head>
+<body>
+  <h2>Send me a message</h2>
+
+  <form id="contact-form">
+    <label>Email Address:</label><br>
+    <input type="email" name="user_email" required><br><br>
+
+    <label>Message:</label><br>
+    <textarea name="message" rows="5" required></textarea><br><br>
+
+    <button type="submit">Send</button>
+  </form>
+
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script>
+    (function() {
+      emailjs.init("ujQVgP9Aml3saLWOu"); // Example: "M9pZx5X..."
+    })();
+
+    document.getElementById("contact-form").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      emailjs.sendForm("service_sgf08ql", "template_eeoilca", this)
+        .then(function() {
+          alert("Message sent successfully!");
+        }, function(error) {
+          alert("Failed to send message. Error: " + JSON.stringify(error));
+        });
+    });
+  </script>
+</body>
+</html>
